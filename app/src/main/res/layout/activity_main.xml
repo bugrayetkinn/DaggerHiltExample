@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.yetkin.daggerhiltexample.util.Resource" />
+
+        <variable
+            name="viewModel"
+            type="com.yetkin.daggerhiltexample.ui.IconSetViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.IconSetActivity">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerIconSet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{viewModel.isError()?View.GONE:View.VISIBLE}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_icon_set" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:visibility="@{viewModel.isLoading() ? View.VISIBLE:View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="184dp"
+            tools:layout_editor_absoluteY="22dp" />
+
+        <ImageView
+            android:id="@+id/imgError"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="50dp"
+            android:src="@drawable/ic_error"
+            android:visibility="@{viewModel.isError()?View.VISIBLE:View.GONE}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
